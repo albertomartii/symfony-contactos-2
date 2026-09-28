@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1>Contactos que empiezan por "{{ letra }}"</h1>
+
+{% for contacto in contactos %}
+{{ include('partials/_contacto.html.twig', {
+'contacto': contacto
+}) }}
+{% endfor %}
+
+{% endblock %}
