@@ -44,6 +44,9 @@ final class ContactoController extends AbstractController
         $entityManager->persist($contacto);
         $entityManager->flush();
 
+        //Obtener Provincia
+        $contacto->getProvincia()->getNombre();
+
         // Redirigir a la ficha del contacto
         return $this->redirectToRoute('contacto', ["codigo" => $contacto->getId()]);
     }
