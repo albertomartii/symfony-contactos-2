@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nuevo Contacto{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Crear Nuevo Contacto</h1>
+
+    <div class="form-container"
+        style="background-color: #ffffff; padding: 20px; border-radius: 5px; max-width: 500px; margin-bottom: 20px;">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
+
+    <div class="acciones">
+        <a href="{{ path('lista_contactos') }}" class="btn btn-secondary">Volver a la lista</a>
+        <a href="{{ path('inicio') }}" class="btn btn-secondary">Volver a Inicio</a>
+    </div>
+</div>
+{% endblock %}

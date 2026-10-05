@@ -1,7 +1,16 @@
 {% extends 'base.html.twig' %}
-{% block title %}Inicio{% endblock %}
-{%block body %}
-<h1>Contactos</h1>
-<h2>Bienvenido a la web de contactos.</h2>
-<p>Página de inicio</p>
+
+{% block title %}Inicio - Agenda de Contactos{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Contactos</h1>
+    <h2>Bienvenido a la web de contactos.</h2>
+    <p>Página de inicio</p>
+
+    <div class="acciones" style="margin-top: 20px; display: flex; gap: 15px;">
+        <a href="{{ path('lista_contactos') }}" class="btn btn-primary">Ver lista de contactos</a>
+        <a href="{{ path('nuevo_contacto') }}" class="btn btn-success">Crear nuevo contacto</a>
+    </div>
+</div>
 {% endblock %}

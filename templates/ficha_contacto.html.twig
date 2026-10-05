@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ficha de Contacto{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Ficha del Contacto</h1>
+
+    {% if contacto %}
+    <div class="contacto-card"
+        style="background-color: #ffffff; padding: 20px; border-radius: 5px; max-width: 500px; margin-bottom: 20px;">
+        {{ include('partials/_contacto.html.twig', {'contacto': contacto}) }}
+    </div>
+    {% else %}
+    <p>No se encontró el contacto especificado.</p>
+    {% endif %}
+
+    <div class="acciones" style="display: flex; gap: 10px;">
+        <a href="{{ path('lista_contactos') }}" class="btn btn-secondary">Volver a la lista</a>
+        <a href="{{ path('inicio') }}" class="btn btn-secondary">Volver a Inicio</a>
+    </div>
+</div>
+{% endblock %}

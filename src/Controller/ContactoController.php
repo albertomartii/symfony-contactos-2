@@ -8,8 +8,40 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Form\ContactoFormType;
 final class ContactoController extends AbstractController
 {
+
+    #[Route('/contacto/lista', name: 'lista_contactos', priority: 2)]
+    public function lista(ManagerRegistry $doctrine): Response
+    {
+        $repositorio = $doctrine->getRepository(Contacto::class);
+        $contactos = $repositorio->findAll();
+
+        return $this->render('lista_contactos.html.twig', [
+            'contactos' => $contactos,
+        ]);
+    }
+
+    #[Route('/contacto/nuevo', name: 'nuevo_contacto', priority: 2)]
+    public function nuevo(Request $request, ManagerRegistry $doctrine): Response
+    {
+        $contacto = new Contacto();
+        $form = $this->createForm(ContactoFormType::class, $contacto);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($contacto);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('lista_contactos');
+        }
+
+        return $this->render('nuevo_contacto.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 
     #[Route('/contacto/{codigo}', name: 'contacto', requirements: ['codigo' => '[0-9]+'])]
     public function ficha(ManagerRegistry $doctrine, int $codigo = 1): Response

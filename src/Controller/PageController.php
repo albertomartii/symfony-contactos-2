@@ -19,50 +19,10 @@ final class PageController extends AbstractController
         ]);
     }
 
-    #[Route('/', name: 'app_page')]
+    #[Route('/', name: 'inicio')]
     public function inicio(): Response
     {
         return $this->render('inicio.html.twig');
-    }
-
-    #[Route('/contacto/{codigo}', name: 'contacto')]
-
-
-
-    #[Route('/contacto/{codigo}', name: 'contacto', requirements: ['codigo' => '[0-9]+'])]
-
-    // Symfony inyecta la dependencia ManagerRegistry automáticamente
-// Le pasa la variable $codigo con el valor en {codigo}. Si no se le pasa, coge 1 por defecto, en otro caso, daría not found
-
-    public function ficha(ManagerRegistry $doctrine, int $codigo = 1): Response
-    {
-
-        // La primera instrucción suele ser esta, ya que cogemos el repositorio de la entidad asociada
-
-        $repositorio = $doctrine->getRepository(Contacto::class);
-
-        // Ahora usamos uno de los métodos del repositorio
-
-        $contacto = $repositorio->find($codigo);
-
-        // Y creamos la vista HTML
-
-        $html = "
-
-        <h1>Detalle del contacto</h1>
-
-        <p>Nombre: " . $contacto->getNombre() . "</p>
-
-        <p>Teléfono: " . $contacto->getTelefono() . "</p>
-
-        <p>Email: " . $contacto->getEmail() . "</p>
-
-        ";
-
-        // Devolvemos como respuesta el html
-
-        return new Response($html);
-
     }
 }
 
